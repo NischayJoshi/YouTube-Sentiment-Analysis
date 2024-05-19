@@ -1,17 +1,14 @@
 import pandas as pd
 import nltk
 from nltk.corpus import stopwords
-from nltk.stem import PorterStemmer, WordNetLemmatizer
 import re
 
 # Download required NLTK data
 nltk.download('stopwords')
-nltk.download('wordnet')
 nltk.download('punkt')
 
-# Initialize stemmer, lemmatizer, and stop words
-ps = PorterStemmer()
-lemmatizer = WordNetLemmatizer()
+# Initialize stop words
+
 stop_words = set(stopwords.words('english'))
 
 def preprocess_text(text):
@@ -28,20 +25,8 @@ def preprocess_text(text):
             filtered_words.append(word)
     words = filtered_words
     
-    # Apply stemming
-    stemmed_words = []
-    for word in words:
-        stemmed_word = ps.stem(word)
-        stemmed_words.append(stemmed_word)
-    
-    # Apply lemmatization
-    lemmatized_words = []
-    for word in stemmed_words:
-        lemmatized_word = lemmatizer.lemmatize(word)
-        lemmatized_words.append(lemmatized_word)
-    
     # Join words back into a single string
-    processed_text = " ".join(lemmatized_words)
+    processed_text = " ".join(words)
     
     return processed_text
 
